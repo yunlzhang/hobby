@@ -1,61 +1,70 @@
 <template>
     <section class="container">
-        <div>
-            <logo/>
-            <h1 class="title">
-                hobby
-            </h1>
-            <h2 class="subtitle">
-                My incredible Nuxt.js project
-            </h2>
-            <div class="links">
-                <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-                <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-            </div>
+        <div class="banner">
+            <el-carousel :interval="4000" type="card" :height="'33.33vw'">
+                <el-carousel-item v-for="item in bannerData" :key="item">
+                    <img :src="'/engine/'+ item" alt="">
+                </el-carousel-item>
+            </el-carousel>
         </div>
     </section>
 </template>
 
-<script >
-    import Logo from '~/components/Logo.vue'
-
+<script>
     export default {
-        components: {
-            Logo
-        }
+        data() {
+            return {
+                bannerData:[
+                    '20171010-20171010-DSC_2019.jpg',
+                    '20171010-20171010-DSC_2020.jpg',
+                    '20171010-20171010-DSC_2068.jpg',
+                    '20171010-20171010-DSC_2075.jpg',
+                    '20171010-20171010-DSC_2078.jpg',
+                    '20171010-20171010-DSC_2091.jpg',
+                    '20171010-20171010-DSC_2190.jpg',
+                    '20171010-20171010-DSC_2198.jpg',
+                    '20171010-20171010-DSC_2223.jpg',
+                    '20171011-20171011-DSC_2363.jpg',
+                    '20171011-20171011-DSC_2367.jpg'
+                ],
+                currentPage1: 5,
+                currentPage2: 5,
+                currentPage3: 5,
+                currentPage4: 4
+            }
+        },
+        mounted() {
+        },
+        methods:{
+        },
+        components: {}
     }
 
 </script>
 
-<style>
+<style lang="scss">
     .container {
         min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        width: 100%;
+        .banner{
+            width: 100%;
+            margin-top:10px
+        }
+        
+        .el-carousel__item img{
+            max-width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+  
+        .el-carousel__item:nth-child(2n) {
+            background-color: #99a9bf;
+        }
+  
+        .el-carousel__item:nth-child(2n+1) {
+            background-color: #d3dce6;
+        }   
     }
-
-    .title {
-        font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        /* 1 */
-        display: block;
-        font-weight: 300;
-        font-size: 100px;
-        color: #35495e;
-        letter-spacing: 1px;
-    }
-
-    .subtitle {
-        font-weight: 300;
-        font-size: 42px;
-        color: #526488;
-        word-spacing: 5px;
-        padding-bottom: 15px;
-    }
-
-    .links {
-        padding-top: 15px;
-    }
-
 </style>

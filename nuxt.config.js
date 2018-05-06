@@ -83,7 +83,7 @@ module.exports = {
          ** You can extend webpack config here
          */
 		babel: {
-			"presets": ["es2015","stage-0",'vue-app']
+			"presets": ["env",'vue-app']
 		},
         extend(config, ctx) {
             // Run ESLint on save

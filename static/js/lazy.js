@@ -80,7 +80,16 @@
         this.calulateView();
 
         this.bindScrollEvent();
-
+        if(document.readyState === 'complete'){
+            var scrollEvent ;
+            if(Event){
+                scrollEvent = new Event('scroll');
+            }else{
+                scrollEvent = document.createEvent('Event');
+                scrollEvent.initEvent('scroll', true, true);
+            }
+            window.dispatchEvent(scrollEvent);
+        };
     };
 
     proto.calulateView = function() {
@@ -107,14 +116,12 @@
    var timer = null;
 
     proto.handleLazyLoad = function() {
-    	var self = this;
-
+        var self = this;
     	if (!this.opts.useDebounce && !!timer) {
     	    return;
     	}
-
+        
         clearTimeout(timer);
-
         timer = setTimeout(function() {
             timer = null;
             self.render()
@@ -131,11 +138,13 @@
         }
 
         var rect = element.getBoundingClientRect();
-
-        return (rect.right >= this.view.left && rect.bottom >= this.view.top && rect.left <= this.view.right && rect.top <= this.view.bottom);
+        return (rect.bottom >= this.view.top && rect.top <= this.view.bottom);
+        
+        // return (rect.right >= this.view.left && rect.bottom >= this.view.top && rect.left <= this.view.right && rect.top <= this.view.bottom);
     };
 
     proto.render = function() {
+        
         var nodes = document.querySelectorAll('[data-lazy-src], [data-lazy-background]');
         var length = nodes.length;
 
@@ -143,13 +152,11 @@
             var elem = nodes[i];
             var src = elem.getAttribute('data-lazy-src')
             if (this.checkInView(elem)) {
-
                 if (elem.getAttribute('data-lazy-background') !== null) {
                     elem.style.backgroundImage = 'url(' + elem.getAttribute('data-lazy-background') + ')';
                 } else if (elem.src !== src) {
                     elem.src = src;
                 }
-
                	elem.removeAttribute('data-lazy-src');
                 elem.removeAttribute('data-lazy-background');
 

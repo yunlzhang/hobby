@@ -281,7 +281,7 @@ proto.append = function (data) {
     var htmlStr = [];
     data.forEach(function(item,index){
         var scale = item.w / item.h;
-        var html = '<div class="pin" style="width:'+self.opts.pinWidth+'px;height:'+self.opts.pinWidth / scale+'px"><img class="img" src="/img/loading.gif" data-lazy-src="'+item.src+'" style="width:'+self.opts.pinWidth+'px;height:'+self.opts.pinWidth / scale+'px"></div>'
+        var html = '<div class="pin" style="width:'+self.opts.pinWidth+'px;height:'+self.opts.pinWidth / scale+'px"><img class="img" src="/img/loading.gif" data-lazy-src="'+item.src+'"></div>'
         htmlStr.push(html)
     })
     var div = document.createElement("div")

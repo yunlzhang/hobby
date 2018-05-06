@@ -3,7 +3,7 @@
         <div class="banner" >
             <el-carousel :interval="4000" type="card" :height="'33.33vw'">
                 <el-carousel-item v-for="item in bannerData" :key="item">
-                    <img :src="'/engine/'+ item" alt="">
+                    <img :src="item" alt="">
                 </el-carousel-item>
             </el-carousel>
         </div>
@@ -58,11 +58,15 @@
     export default {
         async asyncData({app}) {
             let res = await app.$axios.get((process.env.NODE_ENV === 'development' ? 'http://localhost:8083' : 'https://api.lcddjm.com') + '/hobby/get_gather');
-            return {
-                bannerData: res.data.data.banner,
-                locations:res.data.data.locations,
-                times:res.data.data.times,
-                photos: res.data.data.photos
+            if(res.data.code == 200){
+                return {
+                    bannerData: res.data.data.banner,
+                    locations:res.data.data.locations,
+                    times:res.data.data.times,
+                    photos: res.data.data.photos
+                }
+            }else{
+                return {}
             }
         },
         data() {
@@ -181,12 +185,15 @@
             .pin{
                 position: absolute;
                 width:208px;
+                background: #ccc;
+                border-radius:5px;
+                overflow: hidden;
                 img{
-                    width: 100%;
-                    box-sizing:border-box;
-                    border:5px solid #ccc;
-                    border-radius:5px;
-                    background:#ccc;
+                    max-width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left:50%;
+                    transform: translate(-50%,-50%);
                 }
             }
         }

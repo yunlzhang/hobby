@@ -1,6 +1,7 @@
 <template>
   <div>
     <nuxt/>
+    <div class="icp">&copy;京ICP备18002267号-1</div>
   </div>
 </template>
 
@@ -49,5 +50,12 @@ html
 {
   color: #fff;
   background-color: #35495e;
+}
+.icp{
+  text-align: center;
+  line-height: 40px;
+  width: 100%;
+  font-size:14px;
+ 
 }
 </style>

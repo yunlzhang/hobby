@@ -9,7 +9,9 @@ import {
     Message,
     Select,
     Option,
-    MessageBox
+    MessageBox,
+    DatePicker,
+    Input,
 } from 'element-ui';
 
 Vue.use(Pagination);
@@ -19,6 +21,10 @@ Vue.use(Option);
 Vue.use(Upload);
 Vue.use(Carousel);
 Vue.use(CarouselItem);
+Vue.use(DatePicker);
+Vue.use(Input);
+
+
 
 Vue.prototype.$message = Message;
 Vue.prototype.$msgbox = MessageBox;

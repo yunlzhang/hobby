@@ -83,9 +83,10 @@
                 console.log(file);
             },
             onSuccess(file,fileList){
+                console.log(file);
                 if(file.code != 200){
                     return this.$message({
-                        message: res.data.message,
+                        message: file.message,
                         type: 'info'
                     })
                 }
@@ -116,7 +117,7 @@
                     url:this.HOST + '/hobby/save_tourist'
                 })
                 .then(res => {
-                    if(this.data.code == 200){
+                    if(res.data.code == 200){
                         this.$message({
                             message: '发表成功',
                             type: 'success'

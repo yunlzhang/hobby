@@ -5,12 +5,18 @@ const {
 
 module.exports = {
     mode: 'universal',
-
     /*
      ** Headers of the page
      */
     head: {
         title: pkg.name,
+        link: [
+            {
+                rel: 'icon',
+                type: 'image/x-icon',
+                href: '/favicon.ico'
+            }
+        ],
         meta: [{
                 charset: 'utf-8'
             },
@@ -23,14 +29,8 @@ module.exports = {
                 name: 'description',
                 content: pkg.description
             }
-        ],
-        link: [{
-            rel: 'icon',
-            type: 'image/x-icon',
-            href: '/favicon.ico'
-        }]
+        ]
     },
-
     /*
      ** Customize the progress-bar color
      */
@@ -49,8 +49,10 @@ module.exports = {
      ** Plugins to load before mounting the App
      */
     plugins: [
-        '@/plugins/element-ui',
         '@/plugins/global',
+        {
+            src:'@/plugins/element-ui'
+        },
         {
             src: '@/plugins/waterfall',
             ssr: false
@@ -82,9 +84,21 @@ module.exports = {
         /*
          ** You can extend webpack config here
          */
+        analyze: {
+            analyzerMode: 'static'
+        },
 		babel: {
-			"presets": ["env",'vue-app']
-		},
+            "presets": ["env",'vue-app'],
+            plugins: [['component', [
+                {
+                  'libraryName': 'element-ui',
+                  'styleLibraryName': 'theme-chalk'
+                },
+                'transform-async-to-generator',
+                'transform-runtime'
+            ]]],
+            comments: false
+        },
         extend(config, ctx) {
             // Run ESLint on save
             if (ctx.isDev && ctx.isClient) {
@@ -96,7 +110,8 @@ module.exports = {
                 })
             }
         },
-        loaders: [{
+        loaders: [
+            {
                 test: /\.vue$/,
                 loader: 'vue-loader'
             },
@@ -130,7 +145,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
+                test: /\.[sc|c]ss$/,
                 loaders: ['style', 'css', 'sass']
             }
         ],
